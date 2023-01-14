@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import '../Login/Login.css'
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import logo from '../../images/google.png'
+import auth from '../../Firebase/Firebase.init'
 
 const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
+
+    const navigate = useNavigate()
+
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+
+    ] = useCreateUserWithEmailAndPassword(auth)
 
     const handleEmailBlur = event => {
         setEmail(event.target.value)
@@ -19,12 +29,22 @@ const SignUp = () => {
     const handleConformPassword = event => {
         setConfirmPassword(event.target.value)
     }
+    if (user) {
+        navigate('/shop')
+    }
+
     const handleCreateUser = event => {
         event.preventDefault()
         if (password !== confirmPassword) {
             setError("your two Password can't be  match")
             return
         }
+        if (password.length < 6) {
+            setError('password must be 6 characters or longer');
+            return
+        }
+
+        createUserWithEmailAndPassword(email, password)
 
     }
 

@@ -6,7 +6,8 @@
  * 4 create sign up and login in component route both in header component
  * 5 attach form filed handler and form submit handler
  * 6 npm install --save react-firebase-hooks
- * 
+ * 7 useCreateUserWithEmailAndPassword from react-firebase-hook
+ * 8 if user is created redirect another page
  * 
  * **/
 

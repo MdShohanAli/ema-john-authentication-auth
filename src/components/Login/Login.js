@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../Login/Login.css'
 import logo from '../../images/google.png'
 import { useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/Firebase.init';
 
 const Login = () => {
@@ -16,10 +16,12 @@ const Login = () => {
 
     const [
         signInWithEmailAndPassword,
+
         user,
         loading,
         error
     ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
 
 
 
@@ -37,6 +39,9 @@ const Login = () => {
         event.preventDefault()
         signInWithEmailAndPassword(email, password)
 
+    }
+    const handleGoogleLogin = event => {
+        signInWithGoogle()
     }
 
 
@@ -78,7 +83,7 @@ const Login = () => {
                     </div>
 
                 </div>
-                <button className='google-btn'> <img className='google-btn-logo' src={logo} alt="" /> Continue With Google </button>
+                <button onClick={handleGoogleLogin} className='google-btn'> <img className='google-btn-logo' src={logo} alt="" /> Continue With Google </button>
 
             </div>
 

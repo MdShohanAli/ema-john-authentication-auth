@@ -8,6 +8,8 @@
  * 6 npm install --save react-firebase-hooks
  * 7 useCreateUserWithEmailAndPassword from react-firebase-hook
  * 8 if user is created redirect another page
+ * 9 useSignInWithEmailAndPassword for sign in
+ * 10 create RequireAuth component
  * 
  * **/
 

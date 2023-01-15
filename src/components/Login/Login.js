@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../Login/Login.css'
 import logo from '../../images/google.png'
 import { useState } from 'react';
@@ -10,6 +10,8 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
 
 
     const [
@@ -19,6 +21,8 @@ const Login = () => {
         error
     ] = useSignInWithEmailAndPassword(auth);
 
+
+
     const handleEmailBlur = event => {
         setEmail(event.target.value)
     }
@@ -26,7 +30,7 @@ const Login = () => {
         setPassword(event.target.value)
     }
     if (user) {
-        navigate('/shop')
+        navigate(from, { replace: true })
     }
 
     const handleLoginUser = event => {
@@ -39,7 +43,7 @@ const Login = () => {
     return (
         <div className='form-container' >
             <div>
-                <h2 className='login-title' >Login</h2>
+                <h2 className='login-title'>Login</h2>
 
                 <form onSubmit={handleLoginUser} >
 
